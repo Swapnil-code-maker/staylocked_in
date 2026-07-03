@@ -21,6 +21,7 @@ import {
   registerSchema,
   RegisterFormData,
 } from "../register.schema";
+import { getApiErrorMessage } from "@/lib/api-error";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -69,7 +70,7 @@ export default function RegisterForm() {
         return;
       }
 
-      toast.error("Registration failed.");
+      toast.error(getApiErrorMessage(error, "Registration failed."));
     }
   }
 

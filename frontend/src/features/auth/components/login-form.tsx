@@ -12,6 +12,7 @@ import {
   loginSchema,
   LoginFormData,
 } from "../login.schema";
+import { getApiErrorMessage } from "@/lib/api-error";
 
 import {
   Card,
@@ -50,8 +51,8 @@ export default function LoginForm() {
       toast.success("Welcome back!");
 
       router.replace("/dashboard");
-    } catch {
-      toast.error("Invalid email or password.");
+    } catch (error) {
+      toast.error(getApiErrorMessage(error, "Invalid email or password."));
     }
   }
 

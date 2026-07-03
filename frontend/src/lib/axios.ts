@@ -25,7 +25,10 @@ axiosClient.interceptors.request.use(
 axiosClient.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
+    const isLoginRequest = error.config?.url?.includes("/api/auth/login");
+    const hadToken = !!authStorage.getToken();
+
+    if (error.response?.status === 401 && hadToken && !isLoginRequest) {
       authStorage.clear();
 
       if (typeof window !== "undefined") {
